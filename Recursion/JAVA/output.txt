@@ -1,4 +1,5 @@
-aba
-aab
-baa
+aadh
+anh
+kdh
 3
+[aadh, anh, kdh]

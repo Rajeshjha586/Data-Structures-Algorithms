@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Recursion_Problems
+public class Recursion_Class_01
 {
     //******************************************************* */
     //             Recursion Basics Problems
