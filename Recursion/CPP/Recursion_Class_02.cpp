@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 
+
 using namespace std;
 vector<string> words = {
     ":;/",
@@ -211,6 +212,344 @@ vector<string> Decode_Ways_Leetcode_91_02(string str, int idx)
 
 }
 
+// steps : Horizontal Vertical(Return Type)
+vector<string> MazePath_HV(int sr, int sc, int er, int ec)
+{
+    if(sr==er && sc==ec)
+    {
+        vector<string> bres;
+        bres.push_back("");
+        return bres;
+    }
+
+    vector<string> mres;
+    
+    if(sc+1<=ec)
+    {
+        vector<string> Horizontal = MazePath_HV(sr, sc+1, er, ec);
+        for(string s : Horizontal)
+        {
+            mres.push_back("H" + s);
+        }
+    }
+
+    if(sr+1<=er)
+    {
+        vector<string> Vertical = MazePath_HV(sr+1, sc, er, ec);
+        for(string s : Vertical)
+        {
+            mres.push_back("V" + s);
+        }
+    }
+
+    return mres;
+}
+
+// steps : Horizontal Vertical Diagonal(Return Type)
+vector<string> MazePath_HVD(int sr, int sc, int er, int ec)
+{
+    if(sr==er && sc==ec)
+    {
+        vector<string> bres;
+        bres.push_back("");
+        return bres;
+    }
+
+    vector<string> mres;
+    
+    if(sc+1<=ec)
+    {
+        vector<string> Horizontal = MazePath_HVD(sr, sc+1, er, ec);
+        for(string s : Horizontal)
+        {
+            mres.push_back("H" + s);
+        }
+    }
+
+    if(sr+1<=er)
+    {
+        vector<string> Vertical = MazePath_HVD(sr+1, sc, er, ec);
+        for(string s : Vertical)
+        {
+            mres.push_back("V" + s);
+        }
+    }
+
+    if(sr+1<=er && sc+1<=ec)
+    {
+        vector<string> Diagnoal = MazePath_HVD(sr+1, sc+1, er, ec);
+        for(string s : Diagnoal)
+        {
+            mres.push_back("D" + s);
+        }
+    }
+
+    return mres;
+}
+
+// steps : Horizontal Vertical(Void Type)
+int MazePath_HV_01(int sr, int sc, int er, int ec, string ans)
+{
+    if(sr==er && sc==ec)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count = 0;
+    
+    if(sc+1<=ec)
+    {
+        count += MazePath_HV_01(sr, sc+1, er, ec, ans+"H");
+    }
+
+    if(sr+1<=er)
+    {
+        count += MazePath_HV_01(sr+1, sc, er, ec, ans+"V");
+    }
+
+    return count;
+}
+
+// steps : Horizontal Vertical Diagonal(Void Type)
+int MazePath_HVD_01(int sr, int sc, int er, int ec, string ans)
+{
+    if(sr==er && sc==ec)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count = 0;
+    
+    if(sc+1<=ec)
+    {
+        count += MazePath_HVD_01(sr, sc+1, er, ec, ans+"H");
+    }
+
+    if(sr+1<=er)
+    {
+        count += MazePath_HVD_01(sr+1, sc, er, ec, ans+"V");
+    }
+
+    if(sr+1<=er && sc+1<=ec)
+    {
+        count += MazePath_HVD_01(sr+1, sc+1, er, ec, ans+"D");
+    }
+
+    return count;
+}
+
+// steps : Multimove --> Horizontal Vertical(Void Type)
+int MazePath_Multimove_HV(int sr, int sc, int er, int ec, string ans)
+{
+    if(sr==er && sc==ec)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count = 0;
+    
+    for(int jump=1; sc+jump<=ec; jump++)
+    {
+        count += MazePath_Multimove_HV(sr, sc+jump, er, ec, ans + "H" + to_string(jump));
+    }
+
+    for(int jump=1; sr+jump<=er; jump++)
+    {
+        count += MazePath_Multimove_HV(sr+jump, sc, er, ec, ans + "V" + to_string(jump));
+    }
+
+    return count;
+}
+
+// steps : Multimove --> Horizontal Vertical Diagonal(Void Type)
+int MazePath_Multimove_HVD(int sr, int sc, int er, int ec, string ans)
+{
+    if(sr==er && sc==ec)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count = 0;
+    
+    for(int ms=1; ms<=ec-sc; ms++)
+    {
+        count += MazePath_Multimove_HVD(sr, sc+ms, er, ec, ans+"H"+to_string(ms));
+    }
+
+    for(int ms=1; ms<=er-sr; ms++)
+    {
+        count += MazePath_Multimove_HVD(sr+ms, sc, er, ec, ans+"V"+to_string(ms));
+    }
+
+    for(int ms=1; ms<=er-sr && ms<=ec-sc; ms++)
+    {
+        count += MazePath_Multimove_HVD(sr+ms, sc+ms, er, ec, ans+"D"+to_string(ms));
+    }
+
+    return count;
+}
+
+// steps : Multimove --> Horizontal Vertical(Return Type)
+vector<string> MazePath_Multimove_HV_01(int sr, int sc, int er, int ec)
+{
+    if(sr==er && sc==ec)
+    {
+        vector<string> bres;
+        bres.push_back("");
+        return bres;
+    }
+
+    vector<string> mres;
+    
+    for(int ms=1; ms<=ec-sc; ms++)
+    {
+        vector<string> Horizontal = MazePath_Multimove_HV_01(sr, sc+ms, er, ec);
+        for(string s : Horizontal)
+        {
+            mres.push_back(s + "H" + to_string(ms));
+        }
+    }
+
+    for(int ms=1; ms<=er-sr; ms++)
+    {
+        vector<string> vertical = MazePath_Multimove_HV_01(sr+ms, sc, er, ec);
+        for(string s : vertical)
+        {
+            mres.push_back(s + "V" + to_string(ms));
+        }
+    }
+
+    return mres;
+}
+
+// steps : Multimove --> Horizontal Vertical Diagonal(Return Type)
+vector<string> MazePath_Multimove_HVD_01(int sr, int sc, int er, int ec)
+{
+    if(sr==er && sc==ec)
+    {
+        vector<string> bres;
+        bres.push_back("");
+        return bres;
+    }
+
+    vector<string> mres;
+    
+    for(int ms=1; ms<=ec-sc; ms++)
+    {
+        vector<string> Horizontal = MazePath_Multimove_HV_01(sr, sc+ms, er, ec);
+        for(string s : Horizontal)
+        {
+            mres.push_back(s + "H" + to_string(ms));
+        }
+    }
+
+    for(int ms=1; ms<=er-sr; ms++)
+    {
+        vector<string> vertical = MazePath_Multimove_HV_01(sr+ms, sc, er, ec);
+        for(string s : vertical)
+        {
+            mres.push_back(s + "V" + to_string(ms));
+        }
+    }
+
+    for(int ms=1; ms<=er-sr && ms<=ec-sc; ms++)
+    {
+        vector<string> vertical = MazePath_Multimove_HVD_01(sr+ms, sc+ms, er, ec);
+        for(string s : vertical)
+        {
+            mres.push_back(s + "D" + to_string(ms));
+        }
+    }
+
+    return mres;
+}
+
+
+vector<vector<int>> dirA = {{0, -1}, {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}};
+vector<string> dirS = {"L", "N", "U", "E", "R", "S", "D", "W"};
+
+
+int Flood_Fill(int sr, int sc, int er, int ec, vector<vector<int>>& board, string ans)
+{
+    // 0 free cell
+    // 1 blocked cell
+    if(sr==er && sc==ec)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count = 0;
+
+    board[sr][sc] = 1; //mark
+    for(int d=0; d<dirA.size(); d++)
+    {
+        int x = sr + dirA[d][0];
+        int y = sc + dirA[d][1];
+
+        if(x>=0 && y>=0 && x<board.size() && y<board[0].size() && board[x][y]==0)
+        {
+            count+=Flood_Fill(x, y, er, ec, board, ans+dirS[d]);
+        }
+    }
+    board[sr][sc] = 0; //unmarked
+
+    return count;
+}
+
+
+//Path Type Problem
+void Question_Set_02()
+{
+    /*
+    vector<string> res = MazePath_HV(0, 0, 2, 2);
+    for(string ans : res)
+    {
+        cout << ans << endl;
+    }
+    */
+
+    /*
+    vector<string> res = MazePath_HVD(0, 0, 2, 2);
+    for(string ans : res)
+    {
+        cout << ans << endl;
+    }
+    */
+
+    //cout << MazePath_HV_01(0, 0, 2, 2, "") << endl;
+    //cout << MazePath_HVD_01(0, 0, 2, 2, "") << endl;
+
+    
+    //cout << MazePath_Multimove_HV(0, 0, 2, 2, "") << endl;
+    //cout << MazePath_Multimove_HVD(0, 0, 2, 2, "") << endl;
+
+    /*
+    vector<string> res = MazePath_Multimove_HV_01(0, 0, 2, 2);
+    for(string ans : res)
+    {
+        cout << ans << endl;
+    }
+    */
+
+    /*
+    vector<string> res = MazePath_Multimove_HVD_01(0, 0, 2, 2);
+    for(string ans : res)
+    {
+        cout << ans << endl;
+    }
+    */
+
+    vector<vector<int>> board(3, vector<int>(3, 0));
+    cout << Flood_Fill(0, 0, 2, 2, board, "") << endl;
+
+    
+}
+
 void Question_Set_01()
 {
     /*
@@ -240,7 +579,7 @@ void Question_Set_01()
     //cout << Decode_Ways_Leetcode_91("1148", 0, "") << endl;
 
     /*
-    
+                                   
     vector<string> ans = Decode_Ways_Leetcode_91_02("1148", 0);
     for(string res : ans)
     {
@@ -251,7 +590,10 @@ void Question_Set_01()
 }
 void solve()
 {
-    Question_Set_01();
+    //Question_Set_01();
+
+    //Path Type Problem
+    Question_Set_02();
 }
 int main()
 {

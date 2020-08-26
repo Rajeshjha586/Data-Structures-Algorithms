@@ -209,7 +209,285 @@ public class Recursion_Class_02
 
     }
 
+    
 
+    // steps : Horizontal Vertical(Return Type)
+    public static ArrayList<String> MazePath_HV(int sr, int sc, int er, int ec)
+    {
+        if(sr==er && sc==ec)
+        {
+            ArrayList<String> bres = new ArrayList<>();
+            bres.add("");
+            return bres;
+        }
+
+        ArrayList<String> mres = new ArrayList<>();
+
+        if(sc+1<=ec)
+        {
+            ArrayList<String> Horizontal = MazePath_HV(sr, sc+1, er, ec);
+            for(String s : Horizontal)
+            {
+                mres.add("H" + s);
+            }
+        }
+
+        if(sr+1<=er)
+        {
+            ArrayList<String> Horizontal = MazePath_HV(sr+1, sc, er, ec);
+            for(String s : Horizontal)
+            {
+                mres.add("V" + s);
+            }
+        }
+
+        return mres;
+    }
+
+    // steps : Horizontal Vertical Diagonal(Return Type)
+    public static ArrayList<String> MazePath_HVD(int sr, int sc, int er, int ec)
+    {
+        if(sr==er && sc==ec)
+        {
+            ArrayList<String> bres = new ArrayList<>();
+            bres.add("");
+            return bres;
+        }
+
+        ArrayList<String> mres = new ArrayList<>();
+
+        if(sc+1<=ec)
+        {
+            ArrayList<String> Horizontal = MazePath_HVD(sr, sc+1, er, ec);
+            for(String s : Horizontal)
+            {
+                mres.add("H" + s);
+            }
+        }
+
+        if(sr+1<=er)
+        {
+            ArrayList<String> Horizontal = MazePath_HVD(sr+1, sc, er, ec);
+            for(String s : Horizontal)
+            {
+                mres.add("V" + s);
+            }
+        }
+        
+        if(sr+1<=er && sc+1<=ec)
+        {
+            ArrayList<String> Horizontal = MazePath_HVD(sr+1, sc+1, er, ec);
+            for(String s : Horizontal)
+            {
+                mres.add("D" + s);
+            }
+        }
+        return mres;
+    }
+
+    // steps : Horizontal Vertical(Void Type)
+    public static int MazePath_HV_01(int sr, int sc, int er, int ec, String ans)
+    {
+        if(sr==er && sc==ec)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+
+        int count = 0;
+
+        if(sc+1<=ec)
+        {
+            count+=MazePath_HV_01(sr, sc+1, er, ec, ans+"H");
+        }
+
+        if(sr+1<=er)
+        {
+            count+=MazePath_HV_01(sr+1, sc, er, ec, ans+"V");
+        }
+
+        return count;
+    }
+
+    // steps : Horizontal Vertical Diagonal(Void Type)
+    public static int MazePath_HVD_01(int sr, int sc, int er, int ec, String ans)
+    {
+        if(sr==er && sc==ec)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+
+        int count = 0;
+
+        if(sc+1<=ec)
+        {
+            count+=MazePath_HVD_01(sr, sc+1, er, ec, ans+"H");
+        }
+
+        if(sr+1<=er)
+        {
+            count+=MazePath_HVD_01(sr+1, sc, er, ec, ans+"V");
+        }
+
+        if(sr+1<=er && sc+1<=ec)
+        {
+            count+=MazePath_HVD_01(sr+1, sc+1, er, ec, ans+"D");
+        }
+
+        return count;
+    }
+
+    // steps : Multimove --> Horizontal Vertical(Void Type)
+    public static int MazePath_Multimove_HV(int sr, int sc, int er, int ec, String ans)
+    {
+        if(sr==er && sc==ec)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+
+        int count = 0;
+
+        for(int ms=1; ms<=ec-sc; ms++)
+        {
+            count += MazePath_Multimove_HV(sr, sc+ms, er, ec, ans+"H"+ms);
+        }
+
+        for(int ms=1; ms<=er-sr; ms++)
+        {
+            count += MazePath_Multimove_HV(sr+ms, sc, er, ec, ans+"V"+ms);
+        }
+
+        return count;
+    }
+
+    // steps : Multimove --> Horizontal Vertical Diagonal(Void Type)
+    public static int MazePath_Multimove_HVD(int sr, int sc, int er, int ec, String ans)
+    {
+        if(sr==er && sc==ec)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+
+        int count = 0;
+
+        for(int ms=1; ms<=ec-sc; ms++)
+        {
+            count += MazePath_Multimove_HVD(sr, sc+ms, er, ec, ans+"H"+ms);
+        }
+
+        for(int ms=1; ms<=er-sr; ms++)
+        {
+            count += MazePath_Multimove_HVD(sr+ms, sc, er, ec, ans+"V"+ms);
+        }
+
+        for(int ms=1; ms<=er-sr && ms<=ec-sc; ms++)
+        {
+            count += MazePath_Multimove_HVD(sr+ms, sc+ms, er, ec, ans+"D"+ms);
+        }
+
+        return count;
+    }
+
+    // steps : Multimove --> Horizontal Vertical(Return Type)
+    public static ArrayList<String> MazePath_Multimove_HV_01(int sr, int sc, int er, int ec)
+    {
+        if(sr==er && sc==ec)
+        {
+            ArrayList<String> bres = new ArrayList<>();
+            bres.add("");
+            return bres;
+        }
+        
+        ArrayList<String> mres = new ArrayList<>();
+
+        for(int ms=1; ms<=ec-sc; ms++)
+        {
+            ArrayList<String> Horizontal = MazePath_Multimove_HV_01(sr, sc+ms, er, ec);
+            for(String s : Horizontal)
+            {
+                mres.add(s + "H" + ms);
+            }
+        }
+
+        for(int ms=1; ms<=er-sr; ms++)
+        {
+            ArrayList<String> Vertical = MazePath_Multimove_HV_01(sr+ms, sc, er, ec);
+            for(String s : Vertical)
+            {
+                mres.add(s + "V" + ms);
+            }
+        }
+
+        return mres;
+    }
+
+    // steps : Multimove --> Horizontal Vertical(Return Type)
+    public static ArrayList<String> MazePath_Multimove_HVD_01(int sr, int sc, int er, int ec)
+    {
+        if(sr==er && sc==ec)
+        {
+            ArrayList<String> bres = new ArrayList<>();
+            bres.add("");
+            return bres;
+        }
+        
+        ArrayList<String> mres = new ArrayList<>();
+
+        for(int ms=1; ms<=ec-sc; ms++)
+        {
+            ArrayList<String> Horizontal = MazePath_Multimove_HVD_01(sr, sc+ms, er, ec);
+            for(String s : Horizontal)
+            {
+                mres.add(s + "H" + ms);
+            }
+        }
+
+        for(int ms=1; ms<=er-sr; ms++)
+        {
+            ArrayList<String> Vertical = MazePath_Multimove_HVD_01(sr+ms, sc, er, ec);
+            for(String s : Vertical)
+            {
+                mres.add(s + "V" + ms);
+            }
+        }
+
+        for(int ms=1; ms<=er-sr && ms<=ec-sc; ms++)
+        {
+            ArrayList<String> Diagonal = MazePath_Multimove_HVD_01(sr+ms, sc+ms, er, ec);
+            for(String s : Diagonal)
+            {
+                mres.add(s + "D" + ms);
+            }
+        }
+
+        return mres;
+    }
+
+
+
+    public static void Questions_Set_02()
+    {
+        //ArrayList<String> list = MazePath_HV(0, 0, 2, 2);
+        //System.out.println(list);
+
+        //ArrayList<String> list = MazePath_HVD(0, 0, 2, 2);
+        //System.out.println(list);
+
+        //System.out.println(MazePath_HV_01(0, 0, 2, 2, ""));
+        //System.out.println(MazePath_HVD_01(0, 0, 2, 2, ""));
+
+        //System.out.println(MazePath_Multimove_HV(0, 0, 2, 2, ""));
+        //System.out.println(MazePath_Multimove_HVD(0, 0, 2, 2, ""));
+
+        //ArrayList<String> ans = MazePath_Multimove_HV_01(0, 0, 2, 2);
+        //System.out.println(ans);
+
+        //ArrayList<String> ans = MazePath_Multimove_HVD_01(0, 0, 2, 2);
+        //System.out.println(ans);
+    }
     public static void Questions_Set_01()
     {
         //ArrayList<String> list = get_KeyPad_Combination("489");
@@ -229,7 +507,10 @@ public class Recursion_Class_02
     }
     public static void solve()
     {
-        Questions_Set_01();
+        //Questions_Set_01();
+
+        //PATH TYPE
+        Questions_Set_02();
     }
     public static void main(String[] args)
     {
