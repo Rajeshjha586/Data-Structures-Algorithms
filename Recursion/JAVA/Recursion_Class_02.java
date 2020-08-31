@@ -466,6 +466,122 @@ public class Recursion_Class_02
         return mres;
     }
 
+    static int[][] dirA = {{0, -1}, {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}};
+    static String[] dirS = {"L", "N", "U", "E", "R", "S", "D", "W"};
+
+    public static int Flood_Fill(int sr, int sc, int er, int ec, int[][] board, String ans)
+    {
+        if(sr==er && sc==ec)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+
+        int count=0;
+
+        board[sr][sc] = 1;
+        for(int d=0; d<dirA.length; d++)
+        {
+            int x = sr + dirA[d][0];
+            int y = sc + dirA[d][1];
+
+            if(x>=0 && y>=0 && x<board.length && y<board[0].length && board[x][y]==0)
+            {
+                count += Flood_Fill(x, y, er, ec, board, ans+dirS[d]);
+            }
+        }
+        board[sr][sc] = 0;
+
+        return count;
+
+    }
+
+    public static int Flood_Fill_with_MultiMove(int sr, int sc, int er, int ec, int[][] board, String ans)
+    {
+        if(sr==er && sc==ec)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+
+        int count=0;
+
+        board[sr][sc] = 1;
+        for(int d=0; d<dirA.length; d++)
+        {
+            for(int jump=1; jump<board.length; jump++)
+            {
+                int x = sr + jump * dirA[d][0];
+                int y = sc + jump * dirA[d][1];
+
+                if(x>=0 && y>=0 && x<board.length && y<board[0].length && board[x][y]==0)
+                {
+                    count += Flood_Fill_with_MultiMove(x, y, er, ec, board, ans+dirS[d]+jump);
+                }
+            }
+        }
+        board[sr][sc] = 0;
+
+        return count;
+
+    }
+    
+    public static int Rat_In_Maze(int sr, int sc, int er, int ec, int[][] board, String ans)
+    {
+        if(sr==er && sc==ec)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+
+        int count=0;
+
+        board[sr][sc] = 1;
+        for(int d=0; d<dirA.length; d++)
+        {
+            int x = sr + dirA[d][0];
+            int y = sc + dirA[d][1];
+
+            if(x>=0 && y>=0 && x<board.length && y<board[0].length && board[x][y]==0)
+            {
+                count += Rat_In_Maze(x, y, er, ec, board, ans+dirS[d]);
+            }
+        }
+        board[sr][sc] = 0;
+
+        return count;
+
+    }
+    
+    public static int Rat_In_Maze_with_Multimove(int sr, int sc, int er, int ec, int[][] board, String ans)
+    {
+        if(sr==er && sc==ec)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+
+        int count=0;
+
+        board[sr][sc] = 1;
+        for(int d=0; d<dirA.length; d++)
+        {
+            for(int jump=1; jump<board.length; jump++)
+            {
+                int x = sr + jump * dirA[d][0];
+                int y = sc + jump * dirA[d][1];
+
+                if(x>=0 && y>=0 && x<board.length && y<board[0].length && board[x][y]==0)
+                {
+                    count += Rat_In_Maze_with_Multimove(x, y, er, ec, board, ans+dirS[d]+jump);
+                }
+            }
+        }
+        board[sr][sc] = 0;
+
+        return count;
+
+    }
 
 
     public static void Questions_Set_02()
@@ -487,6 +603,21 @@ public class Recursion_Class_02
 
         //ArrayList<String> ans = MazePath_Multimove_HVD_01(0, 0, 2, 2);
         //System.out.println(ans);
+
+        //int[][] board = new int[3][3];
+        //System.out.println(Flood_Fill(0, 0, 2, 2, board, ""));
+
+        //int[][] board = new int[3][3];
+        //System.out.println(Flood_Fill_with_MultiMove(0, 0, 2, 2, board, ""));
+
+        int[][] board = {
+            {0, 1, 1, 1},
+            {0, 0, 1, 0},
+            {1, 0, 1, 1},
+            {0, 0, 0, 0}
+        };
+        //System.out.println(Rat_In_Maze(0, 0, 3, 3, board, ""));
+        System.out.println(Rat_In_Maze_with_Multimove(0, 0, 3, 3, board, ""));
     }
     public static void Questions_Set_01()
     {

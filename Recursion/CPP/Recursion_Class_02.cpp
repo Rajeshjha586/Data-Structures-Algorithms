@@ -501,6 +501,65 @@ int Flood_Fill(int sr, int sc, int er, int ec, vector<vector<int>>& board, strin
     return count;
 }
 
+int Rat_In_Maze(int sr, int sc, int er, int ec, vector<vector<int>>& board, string ans)
+{
+    // 0 free cell
+    // 1 blocked cell
+    if(sr==er && sc==ec)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count = 0;
+
+    board[sr][sc] = 1; //mark
+    for(int d=0; d<dirA.size(); d++)
+    {
+        int x = sr + dirA[d][0];
+        int y = sc + dirA[d][1];
+
+        if(x>=0 && y>=0 && x<board.size() && y<board[0].size() && board[x][y]==0)
+        {
+            count+=Rat_In_Maze(x, y, er, ec, board, ans+dirS[d]);
+        }
+    }
+    board[sr][sc] = 0; //unmarked
+
+    return count;
+}
+
+int Rat_In_Maze_With_Multiple_Steps(int sr, int sc, int er, int ec, vector<vector<int>>& board, string ans)
+{
+    // 0 free cell
+    // 1 blocked cell
+    if(sr==er && sc==ec)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count = 0;
+
+    board[sr][sc] = 1; //mark
+    for(int d=0; d<dirA.size(); d++)
+    {
+        for(int rad=1; rad<=board.size(); rad++)
+        {
+            int x = sr + rad * dirA[d][0];
+            int y = sc + rad * dirA[d][1];
+
+            if(x>=0 && y>=0 && x<board.size() && y<board[0].size() && board[x][y]==0)
+            {
+                count+=Rat_In_Maze_With_Multiple_Steps(x, y, er, ec, board, ans+dirS[d]+to_string(rad));
+            }
+        }
+    }
+    board[sr][sc] = 0; //unmarked
+
+    return count;
+}
+
 
 //Path Type Problem
 void Question_Set_02()
@@ -544,8 +603,30 @@ void Question_Set_02()
     }
     */
 
-    vector<vector<int>> board(3, vector<int>(3, 0));
-    cout << Flood_Fill(0, 0, 2, 2, board, "") << endl;
+    //vector<vector<int>> board(3, vector<int>(3, 0));
+    //cout << Flood_Fill(0, 0, 2, 2, board, "") << endl;
+    
+    /*
+    
+    vector<vector<int>> board = {
+        {0, 1, 1, 1},
+        {0, 0, 1, 0},
+        {1, 0, 1, 1},
+        {0, 0, 0, 0}
+    };
+    
+    cout << Rat_In_Maze(0, 0, 3, 3, board, "") << endl;
+
+    */
+
+   vector<vector<int>> board = {
+        {0, 1, 1, 1},
+        {0, 0, 1, 0},
+        {1, 0, 1, 1},
+        {0, 0, 0, 0}
+    };
+    
+    cout << Rat_In_Maze_With_Multiple_Steps(0, 0, 3, 3, board, "") << endl;
 
     
 }
