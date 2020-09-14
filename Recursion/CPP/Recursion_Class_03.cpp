@@ -288,6 +288,130 @@ Pair Smallest_Path_of_Flood_Fill_with_Multimove_01(int sr, int sc, int er, int e
     return myPair;
 }
 
+//Leetcode-1219
+int Leetcode_1219_get_Maximum_Gold(int r, int c, vector<vector<int>>& board, vector<vector<int>>& dir)
+{
+    board[r][c] = -board[r][c];
+    int res=0;
+
+    for(int d=0; d<4; d++)
+    {
+        int x = r + dir[d][0];
+        int y = c + dir[d][1];
+
+        if(x>=0 && y>=0 && x<board.size() && y<board[0].size() && board[x][y] > 0)
+        {
+            res = max(res, Leetcode_1219_get_Maximum_Gold(x, y, board, dir));
+        }
+    }
+    
+    board[r][c] = -board[r][c];
+    return res + board[r][c];
+}
+int get_Max_Gold(vector<vector<int>>& board)
+{
+    vector<vector<int>> dir = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+
+    int res = 0;
+    for(int i=0; i<board.size(); i++)
+    {
+        for(int j=0; j<board[0].size(); j++)
+        {
+            if(board[i][j] > 0)
+            {
+                res = max(res, Leetcode_1219_get_Maximum_Gold(i, j, board, dir));  
+            }
+        }
+    }
+    return res;
+}
+
+int Leetcode_980_UniquePath_III(int sr, int sc, int er, int ec, int freeCell, vector<vector<int>>& board, vector<vector<int>>& dir) 
+{
+    if(sr==er && sc==ec)
+    {
+        if(freeCell==1)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+    int count = 0;
+    int temp = board[sr][sc];
+    board[sr][sc] = -2;
+
+    for(int d=0; d<4; d++)
+    {
+        int x = sr + dir[d][0];
+        int y = sc + dir[d][1];
+
+        if(x>=0 && y>=0 && x<board.size() && y<board[0].size() && board[x][y] >= 0)
+        {
+            count += Leetcode_980_UniquePath_III(x, y, er, ec, freeCell-1, board, dir);
+        }
+    }
+
+    board[sr][sc] = temp;
+    return count;
+}
+int UniquePath_III(vector<vector<int>>& board)
+{
+    vector<vector<int>> dir = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+
+    int sr, sc, er, ec, freeCell=0;
+    for(int i=0; i<board.size(); i++)
+    {
+        for(int j=0; j<board[0].size(); j++)
+        {
+            if(board[i][j] != -1)
+            {
+                freeCell++;
+            }
+            if(board[i][j] == 1)
+            {
+                sr = i;
+                sc = j;
+            }
+            if(board[i][j] == 2)
+            {
+                er=i;
+                ec=j;
+            }
+        }
+    }
+    return Leetcode_980_UniquePath_III(sr, sc, er, ec, freeCell, board, dir);
+}
+
+void Questions_Set_02()
+{
+    /*
+    
+    vector<vector<int>> board = {
+        {1, 0, 7},
+        {2, 0, 6},
+        {3, 4, 5},
+        {0, 3, 0},
+        {0, 0, 20},
+    };
+
+    cout << get_Max_Gold(board) << endl;
+
+    */
+
+    vector<vector<int>> board = {
+        //{1,0,0,0},
+        //{0,0,0,0},   //output for this test case is -> 2
+        //{0,0,2,-1}
+
+        {1,0,0,0},
+        {0,0,0,0},   //output for this test case is -> 4
+        {0,0,0,2}
+    };
+
+    cout << UniquePath_III(board) << endl;
+}
+
 void Questions_Set_01()
 {
     //vector<vector<int>> board(3, vector<int>(3, 0));
@@ -296,14 +420,14 @@ void Questions_Set_01()
     //vector<vector<int>> board(3, vector<int>(3, 0));
     //cout << Longest_path_of_Flood_Fill(0, 0, 2, 2, board) << endl;
 
-    vector<vector<int>> board(3, vector<int>(3, 0));
-    cout << Longest_path_of_Flood_Fill_with_Multimove(0, 0, 2, 2, board) << endl;
+    //vector<vector<int>> board(3, vector<int>(3, 0));
+    //cout << Longest_path_of_Flood_Fill_with_Multimove(0, 0, 2, 2, board) << endl;
 
     //vector<vector<int>> board(3, vector<int>(3, 0));
     //cout << Smallest_Path_of_Flood_Fill(0, 0, 2, 2, board) << endl;
 
-    vector<vector<int>> board(3, vector<int>(3, 0));
-    cout << Smallest_Path_of_Flood_Fill_with_Multimove(0, 0, 2, 2, board) << endl;
+    //vector<vector<int>> board(3, vector<int>(3, 0));
+    //cout << Smallest_Path_of_Flood_Fill_with_Multimove(0, 0, 2, 2, board) << endl;
     
     //vector<vector<int>> board(3, vector<int>(3, 0));
     //Pair ans = Longest_path_of_Flood_Fill_01(0, 0, 2, 2, board);
@@ -324,7 +448,9 @@ void Questions_Set_01()
 }
 void solve()
 {
-    Questions_Set_01();
+    //Questions_Set_01();
+
+    Questions_Set_02();
 }
 int main()
 {
