@@ -308,6 +308,7 @@ int Leetcode_1219_get_Maximum_Gold(int r, int c, vector<vector<int>>& board, vec
     board[r][c] = -board[r][c];
     return res + board[r][c];
 }
+
 int get_Max_Gold(vector<vector<int>>& board)
 {
     vector<vector<int>> dir = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
@@ -355,6 +356,7 @@ int Leetcode_980_UniquePath_III(int sr, int sc, int er, int ec, int freeCell, ve
     board[sr][sc] = temp;
     return count;
 }
+
 int UniquePath_III(vector<vector<int>>& board)
 {
     vector<vector<int>> dir = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
@@ -446,6 +448,7 @@ void Questions_Set_01()
     //cout << ans.path << " " << ans.len << " ";
 
 }
+
 void solve()
 {
     //Questions_Set_01();
