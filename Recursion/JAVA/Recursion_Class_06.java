@@ -29,11 +29,133 @@ public class Recursion_Class_06
         }
         return count;
     }
+
+
+    
+    // Not Optimized
+    public static int count_All_sets_bits_01(int num)
+    {
+        int count=0;
+        for(int i=0; i<32; i++)
+        {
+            int mask = (1 << i);
+            if( (num & mask) != 0)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    //optimized
+    public static int count_All_sets_bits_02(int num)
+    {
+        int count=0;
+        
+        // infinte loop i.e for case -1 or -value
+        while(num != 0)
+        {
+            if( (num & 1) != 0)
+            {
+                count++;
+            }
+
+            num >>= 1;
+        }
+
+        return count;
+    }
+
+    //optimized
+    public static int count_All_sets_bits_03(int num)
+    {
+        int count=0;
+        
+        // infinte loop i.e for case -1 or -value
+        while(num != 0)
+        {
+            if( (num & 1) != 0)
+            {
+                count++;
+            }
+
+            num >>>= 1;
+        }
+
+        return count;
+    }
+
+    // leetcode :- 191 Number of 1 bits
+    //more optimized
+    public static int count_All_sets_bits_04(int num)
+    {
+        int count=0;
+        
+        while(num != 0)
+        {
+            count++;
+            num &= (num-1);
+        }
+
+        return count;
+    }
+
+    public static int Unique_Number_in_Array(int[] arr)
+    {
+        int res=0;
+        for(int ele : arr)
+        {
+            res ^= ele;
+        }
+        return res;
+    }
+
+    //Leetcode :- 231 Power of two
+    public static boolean isPowerOfTwo(int n) 
+    {
+        return n>0 && (n & (n-1)) == 0;
+    }
+
+    //Leetcode :- 338 counting bits
+    public static int[] counting_bits(int num)
+    {
+        int[] ans = new int[num+1];
+        for(int i=1; i<=num; i++)
+        {
+            ans[i] = ans[(i & (i-1))] + 1;
+        }
+
+        return ans;
+    }
+
+
+
+    public static void Bits_Questions_Set_02()
+    {
+        //System.out.println(count_All_sets_bits_01(13));
+        //System.out.println(count_All_sets_bits_02(15));
+        //System.out.println(count_All_sets_bits_03(-1));
+        //System.out.println(count_All_sets_bits_04(15));
+        //System.out.println(count_All_sets_bits_04(00000000000000000000000000001011));
+
+        //int[] arr = {2, 2, 4, 3, 4, 5, 7, 5, 3};
+        //System.out.println(Unique_Number_in_Array(arr));
+
+        //System.out.println(isPowerOfTwo(15));
+
+        int[] res = counting_bits(10);
+        for(int i=0; i<res.length; i++)
+        {
+            System.out.print(res[i] + " ");
+        }
+    }
+
     public static void Questions_Set_01()
     {
-        int n=10;
-        int m=10;
-        int tnq = 10;
+        int n=4;
+        int m=4;
+        int tnq = 4;
         ROWS = new boolean[n];
         COLS = new boolean[m];
         DIAG = new boolean[n+m-1];
@@ -41,9 +163,12 @@ public class Recursion_Class_06
 
         System.out.println(N_Queen_Problem_combination_06(n, m, 0, tnq, ""));
     }
+
     public static void solve()
     {
-        Questions_Set_01();
+        //Questions_Set_01();
+
+        Bits_Questions_Set_02();
     }
     public static void main(String[] args)
     {
