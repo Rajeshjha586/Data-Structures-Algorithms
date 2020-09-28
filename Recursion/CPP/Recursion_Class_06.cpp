@@ -35,6 +35,44 @@ int N_Queen_Problem_Combination_06(int n, int m, int idx, int tnq, string ans)
     return count;
 }
 
+int rows = 0;
+int cols = 0;
+int diag = 0;
+int adiag = 0;
+int N_Queen_Problem_Combination_07(int n, int m, int idx, int tnq, string ans)
+{
+    if(tnq==0)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count=0;
+    for(int r=idx; r<n*m; r++)
+    {
+        int x = r / m;
+        int y = r % m;
+
+        if(!(rows & (1<<x)) && !(cols & (1<<y)) && !(diag & (1 << (x+y))) && !(adiag & (1 << (x-y +(m-1)))))
+        {
+            rows ^= (1 << x);
+            cols ^= (1 << y);
+            diag ^= (1 << (x+y));
+            adiag ^= (1 << (x-y + (m-1)));
+
+            count += N_Queen_Problem_Combination_07(n, m, r+1, tnq-1, ans+"("+to_string(x)+","+to_string(y)+") ");
+            
+            rows ^= (1 << x);
+            cols ^= (1 << y);
+            diag ^= (1 << (x+y));
+            adiag ^= (1 << (x-y + (m-1)));
+            
+        }
+    }
+
+    return count;
+}
+
 
 int off_To_On(int num, int k)
 {
@@ -113,23 +151,24 @@ void Bits_Questions_Set_02()
 
 void Questions_Set_01()
 {
-    int n=4;
-    int m=4;
-    int tnq=4;
+    int n=10;
+    int m=10;
+    int tnq=10;
 
     ROWS.resize(n, false);
     COLS.resize(m, false);
     DIAG.resize(n+m-1, false);
     ADIAG.resize(n+m-1, false);
 
-    cout << N_Queen_Problem_Combination_06(n, m, 0, tnq, "") << endl;
+    //cout << N_Queen_Problem_Combination_06(n, m, 0, tnq, "") << endl;
+    cout << N_Queen_Problem_Combination_07(n, m, 0, tnq, "") << endl;
 }
 
 void solve()
 {
-    //Questions_Set_01();
+    Questions_Set_01();
     
-    Bits_Questions_Set_02();
+    //Bits_Questions_Set_02();
 }
 
 int main()

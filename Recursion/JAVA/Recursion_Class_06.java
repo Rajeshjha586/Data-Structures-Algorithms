@@ -30,6 +30,41 @@ public class Recursion_Class_06
         return count;
     }
 
+    static int rows=0;
+    static int cols=0;
+    static int diag=0;
+    static int adiag=0;
+    public static int N_Queen_Problem_combination_07(int n, int m, int idx, int tnq, String ans)
+    {
+        if (tnq==0)
+        {
+            System.out.println(ans);
+            return 1;
+        }
+        
+        int count = 0;
+        for(int r=idx; r<n*m; r++)
+        {
+            int x = r / m;
+            int y = r % m;
+            if((rows & (1<<x))==0 && (cols & (1<<y))==0 && (diag & (1<<(x+y)))==0 && (adiag & (1<<(x-y+(m-1))))==0)
+            {
+                rows ^= (1<<x);
+                cols ^= (1<<y);
+                diag ^= (1<<(x+y));
+                adiag ^= (1<<(x-y + (m-1)));
+
+                count+=N_Queen_Problem_combination_07(n, m, r+1, tnq-1, ans+"("+x+","+y+") ");
+                
+                rows ^= (1<<x);
+                cols ^= (1<<y);
+                diag ^= (1<<(x+y));
+                adiag ^= (1<<(x-y + (m-1)));
+            }
+        }
+        return count;
+    }
+
 
     
     // Not Optimized
@@ -144,11 +179,15 @@ public class Recursion_Class_06
 
         //System.out.println(isPowerOfTwo(15));
 
+        /*
+
         int[] res = counting_bits(10);
         for(int i=0; i<res.length; i++)
         {
             System.out.print(res[i] + " ");
         }
+
+        */
     }
 
     public static void Questions_Set_01()
@@ -161,14 +200,16 @@ public class Recursion_Class_06
         DIAG = new boolean[n+m-1];
         ADIAG = new boolean[n+m-1];
 
-        System.out.println(N_Queen_Problem_combination_06(n, m, 0, tnq, ""));
+        //System.out.println(N_Queen_Problem_combination_06(n, m, 0, tnq, ""));
+        
+        System.out.println(N_Queen_Problem_combination_07(n, m, 0, tnq, ""));
     }
 
     public static void solve()
     {
-        //Questions_Set_01();
+        Questions_Set_01();
 
-        Bits_Questions_Set_02();
+        //Bits_Questions_Set_02();
     }
     public static void main(String[] args)
     {
