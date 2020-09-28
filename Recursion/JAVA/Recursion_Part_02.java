@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Recursion_Class_02
+public class Recursion_Part_02
 {
 
     static String[] words ={

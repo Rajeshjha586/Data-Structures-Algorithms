@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Recursion_Class_03
+public class Recursion_Part_03
 {
     static int[][] dirA = {{0, -1}, {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}};
     static String[] dirS = {"L", "N", "U", "E", "R", "S", "D", "W"};

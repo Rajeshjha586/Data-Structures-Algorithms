@@ -1,4 +1,4 @@
-public class Recursion_Class_06
+public class Recursion_Part_06
 {
 
     static boolean[] ROWS;

@@ -1,4 +1,4 @@
-public class Recursion_Class_04
+public class Recursion_Part_04
 {
     public static int coinChange_Permutation_INF(int[] arr, int tar, String ans)
     {

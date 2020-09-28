@@ -1,5 +1,5 @@
 import java.util.Arrays;
-public class Recursion_Class_05
+public class Recursion_Part_05
 {
     public static boolean isValidMove(boolean[][] board, int r, int c)
     {
