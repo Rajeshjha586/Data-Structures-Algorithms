@@ -14,4 +14,9 @@ Mainly Topic Covered :-
 > Graph
 
 > Bit Masking
+ 
+> Stack and Queue
 
+> Priority Queue
+
+> Hashmap
