@@ -136,11 +136,11 @@ void Bits_Questions_Set_02()
     int num = 123;
     int k = 3;
 
-    //cout << off_To_On(num, k) << endl;
+    cout << off_To_On(num, k) << endl;
 
-    //cout << (on_To_Off_01(num, k) == on_To_Off_02(num, k)) << endl;
+    cout << (on_To_Off_01(num, k) == on_To_Off_02(num, k)) << endl;
 
-    //cout << count_All_Set_Bits(13) << endl;
+    cout << count_All_Set_Bits(13) << endl;
 
     vector<int> res = counting_bits(10);
     for(int i=0; i<res.size(); i++)
