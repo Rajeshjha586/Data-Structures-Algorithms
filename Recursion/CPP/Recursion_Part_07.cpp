@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<unordered_set>
 
 using namespace std;
 
@@ -260,9 +261,51 @@ void Sudoku_Problem()
 
     //cout << isValidSudoku(board) << endl;
 }
+
+vector<string> words{"mobile","samsung","sam","sung", 
+                    "man","mango","icecream","and", 
+                    "go","i","like","ice","cream"};   
+bool isContains(string word)
+{
+    for(string s : words)
+    {
+        if(s.compare(word)==0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+int Word_Break(string str, string ans)
+{
+    if(str.length()==0)
+    {
+        cout << ans << endl;
+        return 1;
+    }
+
+    int count = 0;
+    for(int i=1; i<=str.length(); i++)
+    {
+        string smallStr = str.substr(0, i);
+        if(isContains(smallStr))
+        {
+            count += Word_Break(str.substr(i), ans + "-" + smallStr);
+        }
+    }
+    return count;
+}
+void Word_Break_Problem()
+{
+    string str = "ilikesamsungandmangoandicecream";
+    cout << Word_Break(str, "") << endl;
+}
 void Questions_Set_01()
 {
-    Sudoku_Problem();
+    //Sudoku_Problem();
+
+    Word_Break_Problem();
 }
 void solve()
 {
