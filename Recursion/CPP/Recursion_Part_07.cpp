@@ -1,6 +1,5 @@
 #include<iostream>
 #include<vector>
-#include<unordered_set>
 
 using namespace std;
 
@@ -55,7 +54,7 @@ bool is_Safe_To_Place_Number(vector<vector<char>>& board, int x, int y, int num)
 
 
 //Leetcode Submition :- 37
-/*
+
 bool solve_Sudoku_Problem(vector<vector<char>>& board, vector<int>& calls, int idx)
 {
     if(idx==calls.size())
@@ -83,8 +82,22 @@ bool solve_Sudoku_Problem(vector<vector<char>>& board, vector<int>& calls, int i
 
     return false;
 }
+void solveSudoku(vector<vector<char>>& board)
+{
+    vector<int> calls;
+    for(int i=0; i<9; i++)
+    {
+        for(int j=0; j<9; j++)
+        {
+            if(board[i][j] == '.')
+            {
+                calls.push_back(i * 9 + j);
+            }
+        }
+    }
 
-*/
+    solve_Sudoku_Problem(board, calls, 0);
+}
 
 
 int solve_Sudoku_Problem_01(vector<vector<char>>& board, vector<int>& calls, int idx)
@@ -112,9 +125,8 @@ int solve_Sudoku_Problem_01(vector<vector<char>>& board, vector<int>& calls, int
 
     return res;
 }
-
 // It mapped 2-D Array into 1-D Array
-void solveSudoku(vector<vector<char>>& board)
+void solveSudoku_01(vector<vector<char>>& board)
 {
     vector<int> calls;
     for(int i=0; i<9; i++)
@@ -174,9 +186,8 @@ int solve_Sudoku_Problem_02(vector<vector<char>>& board, vector<int>& calls, int
 
     return res;
 }
-
 // It mapped 2-D Array into 1-D Array
-void solveSudoku_01(vector<vector<char>>& board)
+void solveSudoku_02(vector<vector<char>>& board)
 {
     rows.assign(9, 0);
     cols.assign(9, 0);
@@ -259,6 +270,8 @@ void Sudoku_Problem()
 
     //solveSudoku_01(board);
 
+    //solveSudoku_02(board);
+
     //cout << isValidSudoku(board) << endl;
 }
 
@@ -301,16 +314,19 @@ void Word_Break_Problem()
     string str = "ilikesamsungandmangoandicecream";
     cout << Word_Break(str, "") << endl;
 }
+
 void Questions_Set_01()
 {
-    //Sudoku_Problem();
+    Sudoku_Problem();
 
-    Word_Break_Problem();
+    //Word_Break_Problem();
 }
+
 void solve()
 {
     Questions_Set_01();
 }
+
 int main()
 {
     solve();
