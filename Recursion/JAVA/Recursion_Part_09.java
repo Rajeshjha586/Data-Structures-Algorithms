@@ -34,6 +34,7 @@ public class Recursion_Part_09
             }
         }
     }
+
     public static List<List<Integer>> combinationSum(int[] arr, int target)
     {
         Arrays.sort(arr);
@@ -45,6 +46,7 @@ public class Recursion_Part_09
 
         return res;
     }
+
     public static void Leetcode_39()
     {
         int[] arr = {2,3,6,7};
@@ -54,7 +56,7 @@ public class Recursion_Part_09
         System.out.println(myans);
     }
 
-    //Leetcode 39
+    //Leetcode 90
     public static void K_Sum_2_Solver(int[] arr, int idx, int target,int k, List<List<Integer>> res, List<Integer> ans)
     {
         if(k==0)
@@ -89,6 +91,7 @@ public class Recursion_Part_09
             }
         }
     }
+
     public static List<List<Integer>> K_Sum_2(int[] arr, int target, int k)
     {
         Arrays.sort(arr);
@@ -100,6 +103,7 @@ public class Recursion_Part_09
 
         return res;
     }
+
     public static void LintCode_90()
     {
         int[] arr = {1,3,4,6};
@@ -109,12 +113,14 @@ public class Recursion_Part_09
         List<List<Integer>> myans = K_Sum_2(arr, target, k);
         System.out.println(myans);
     }
+
     public static void solve()
     {
         //Leetcode_39();
 
         LintCode_90();
     }
+    
     public static void main(String[] args)
     {
         solve();
