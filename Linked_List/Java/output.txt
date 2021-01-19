@@ -1,1 +1,4 @@
-10-->20-->30-->40-->50-->.
+10-->20-->30-->40-->50-->
+First Node of List :- 10
+Last Node of List :- 50
+Get Any Node of List :- 30
