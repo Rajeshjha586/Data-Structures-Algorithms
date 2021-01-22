@@ -99,6 +99,19 @@ public class LinkedList
             return temp.data;
         }
     }
+    public void addFirst(int data)
+    {
+        Node temp = new Node();
+        temp.data = data;
+        temp.next = head;
+        head = temp;
+
+        if(this.size == 0)
+        {
+            tail = temp;
+        }
+        this.size++;
+    }
     public void display()
     {
         Node temp = this.head;
@@ -149,6 +162,21 @@ public class LinkedList
         System.out.println("Get Any Node of List :- " + list.getAt(2));
 
     }
+    public static void LL_addFirst()
+    {
+        LinkedList list = new LinkedList();
+        list.addLast(10); 
+        list.addLast(20); 
+        list.addLast(30); 
+        list.addLast(40); 
+        list.addLast(50);
+        list.display();
+        System.out.println("Size of List :- " + list.size);
+        list.addFirst(60);
+        list.addFirst(70);
+        list.display();
+        System.out.println("Size of List :- " + list.size);
+    }
     public static void LinkedList_Problems()
     {
         //LL_AddLast();
@@ -157,6 +185,8 @@ public class LinkedList
 
         /* Get_First --> Get_Last --> Get_At_IDX */
         //LL_GetElements();
+
+        //LL_addFirst();
     }
     public static void solve()
     {

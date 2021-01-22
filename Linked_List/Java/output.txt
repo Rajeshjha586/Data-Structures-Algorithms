@@ -1,4 +1,4 @@
 10-->20-->30-->40-->50-->
-First Node of List :- 10
-Last Node of List :- 50
-Get Any Node of List :- 30
+Size of List :- 5
+70-->60-->10-->20-->30-->40-->50-->
+Size of List :- 7
