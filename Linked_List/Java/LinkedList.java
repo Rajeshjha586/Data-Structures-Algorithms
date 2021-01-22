@@ -112,6 +112,37 @@ public class LinkedList
         }
         this.size++;
     }
+    public void addAt(int idx, int data)
+    {
+        if(idx<0 || idx>size)
+        {
+            System.out.println("Invalid Argument");
+        }
+        else if(idx == 0)
+        {
+            addFirst(data);
+        }
+        else if(idx==size)
+        {
+            addLast(data);
+        }
+        else
+        {
+            Node node = new Node();
+            node.data = data;
+
+            Node temp = head;
+            for(int i=0; i<idx-1; i++)
+            {
+                temp = temp.next;
+            }
+
+            node.next = temp.next;
+            temp.next = node;
+
+            this.size++;
+        }
+    }
     public void display()
     {
         Node temp = this.head;
@@ -177,6 +208,21 @@ public class LinkedList
         list.display();
         System.out.println("Size of List :- " + list.size);
     }
+    public static void LL_addAt()
+    {
+        LinkedList list = new LinkedList();
+        list.addLast(10); 
+        list.addLast(20); 
+        list.addLast(30); 
+        list.addLast(40); 
+        list.addLast(50);
+        list.display();
+        System.out.println("Size of List :- " + list.size);
+        list.addAt(2, 300);
+        list.addAt(5, 400);
+        list.display();
+        System.out.println("Size of List :- " + list.size);
+    }
     public static void LinkedList_Problems()
     {
         //LL_AddLast();
@@ -187,6 +233,8 @@ public class LinkedList
         //LL_GetElements();
 
         //LL_addFirst();
+
+        LL_addAt();
     }
     public static void solve()
     {
