@@ -2,6 +2,22 @@ import java.util.Scanner;
 
 public class isPrime
 {
+    public static void isPrime_Number_02(int n)
+    {
+        boolean flag = true;
+        for(int div=2; div*div<=n; div++){
+            if(n % div == 0){
+                flag = false;
+                break;
+            }
+        }
+
+        if(flag == false){
+            System.out.println("Is Not Prime");
+        }else{
+            System.out.println("Is Prime");
+        }
+    }
     public static void isPrime_Number_01(int n)
     {
         int count = 0;
@@ -53,7 +69,9 @@ public class isPrime
             int n = scn.nextInt();
 
             //isPrime_Number(n);  // n=10 pow 9        =>  which is 10 pow 13
-            isPrime_Number_01(n); 
+            // isPrime_Number_01(n);
+
+            isPrime_Number_02(n); 
         }
     }
     public static void main(String[] args)
